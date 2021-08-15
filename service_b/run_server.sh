@@ -1,0 +1,1 @@
+uvicorn --port 8002 service_b.app:app
