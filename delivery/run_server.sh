@@ -1,0 +1,1 @@
+uvicorn --port 8002 delivery.app:app

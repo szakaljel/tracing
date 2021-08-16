@@ -8,10 +8,10 @@ from common.config.redis import initialize_redis
 from service_b.resources import register_resources
 
 tracing_client = initialize_tracing_client('service_b')
-redis = initialize_redis()
+redis_awaitable = initialize_redis()
 app = falcon.asgi.App(middleware=[
     TracingMiddleware(tracing_client),
-    RedisMiddleware(redis)
+    RedisMiddleware(redis_awaitable)
 ])
 
 register_resources(app)

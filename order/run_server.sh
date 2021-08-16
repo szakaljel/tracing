@@ -1,0 +1,1 @@
+uvicorn --port 8001 order.app:app
