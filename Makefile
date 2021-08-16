@@ -7,7 +7,7 @@ start_order_service:
 start_delivery_service:
 	. venv/bin/activate; delivery/run_server.sh
 
-start_notification:
+start_notification_service:
 	. venv/bin/activate; notification/run_worker.sh
 
 start_env:

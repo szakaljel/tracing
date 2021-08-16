@@ -1,5 +1,4 @@
 from opentracing.propagation import Format
-from service_c.worker import CHANNEL_NAME
 import aioredis
 import json
 import falcon
