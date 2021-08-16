@@ -1,5 +1,5 @@
 linter:
-	pylint service_a service_b service_c
+	. venv/bin/activate; pylint common order delivery notification
 
 start_order_service:
 	. venv/bin/activate; order/run_server.sh

@@ -7,7 +7,7 @@ from opentracing.span import Span
 
 class TracingHttpClient(aiohttp.ClientSession):
     def __init__(self, tracing_client: Tracer, parent_span: Span):
-        super().__init__()
+        super().__init__(raise_for_status=True)
         self._parent_span = parent_span
         self._tracing_client = tracing_client
     
@@ -22,6 +22,7 @@ class TracingHttpClient(aiohttp.ClientSession):
                 child_of=self._parent_span
             ) as scope:
             try:
+                # inject span info to headers for child spans
                 headers = kwargs.get('headers') or {}
                 self._tracing_client.inject(scope.span.context, Format.HTTP_HEADERS, headers)
                 kwargs['headers'] = headers
@@ -31,6 +32,7 @@ class TracingHttpClient(aiohttp.ClientSession):
                     str_or_url,
                     **kwargs)
             except Exception as ex:
+                # log failed request
                 scope.span.log_event('request failed', {
                     'exception': str(ex)
                 })

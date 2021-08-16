@@ -1,5 +1,4 @@
 from jaeger_client import Config
-from opentracing import Format
 from opentracing.scope_managers.asyncio import AsyncioScopeManager
 
 
